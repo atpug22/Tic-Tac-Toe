@@ -114,7 +114,7 @@ footer{
   .bottom {
     border-bottom: solid 5px rgb(0, 0, 0);
   }
-  .reset-section{
+  .reset-section,.replay-section{
       position: absolute;
       display: none;
   }
@@ -149,4 +149,8 @@ footer{
         border-radius: 5px;
         color: white;
         font-size: 2em;
+}
+.replay{
+    margin-top: 4px;
+    margin-left: 63px;
 }
