@@ -190,7 +190,7 @@ $(document).ready(function(){
         let score = [];
         let index=[];
         for (let i = 0; i < emptyspots.length; i++) {
-            let val,j
+            let val,j;
             j = newBoard[emptyspots[i]];
             newBoard[emptyspots[i]] = player;
             
