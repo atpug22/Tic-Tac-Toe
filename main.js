@@ -54,6 +54,15 @@ $(document).ready(function(){
                     arr[z]=user;
                     $(this).append(user);
                     currentPlayer="You";
+                    resultCheck(cells);
+                    if(!checkDraw()){console.log('Aryaman');
+                    let x=minimax(arr, computer);
+                    console.log(x);
+                    arr[x]=computer;
+                    console.log(arr);
+                    $('#'+x).append(computer);
+                    currentPlayer="Computer";
+                    resultCheck(cells);}
                 
                 }
             else
@@ -62,15 +71,7 @@ $(document).ready(function(){
                     turn--;
                 }
             
-            resultCheck(cells);
-            if(!checkDraw()){console.log('Aryaman');
-            let x=minimax(arr, computer);
-            console.log(x);
-            arr[x]=computer;
-            console.log(arr);
-            $('#'+x).append(computer);
-            currentPlayer="Computer";
-            resultCheck(cells);}
+            
             });
         }
         }
