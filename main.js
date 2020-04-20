@@ -55,7 +55,7 @@ $(document).ready(function(){
                     $(this).append(user);
                     currentPlayer="You";
                     resultCheck(cells);
-                    if(!checkDraw()){console.log('Aryaman');
+                    if(!checkDraw()&&!checkWinner(arr,user)){console.log('Aryaman');
                     let x=minimax(arr, computer);
                     console.log(x);
                     arr[x]=computer;
@@ -132,6 +132,7 @@ $(document).ready(function(){
             if (a === b && b === c) {
                 $(".result").append(`${currentPlayer} Wins!`);
                 $("#overlay").css("display","flex");
+                gameOver();
                 return;
             }
         }
@@ -143,6 +144,7 @@ $(document).ready(function(){
             if (k==9) {
                 $(".result").append(`Match Draw`);
                 $("#overlay").css("display","flex");
+                gameOver();
                 return;
             }
         }
@@ -226,6 +228,12 @@ $(document).ready(function(){
             }
         }
         return index[bestMove];
+    }
+    function gameOver()
+    {
+        for(let i=0;i<9;i++){
+            $(cells[i]).off('click');
+        }
     }
 });
 function off(element) {
