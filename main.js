@@ -56,7 +56,7 @@ $(document).ready(function(){
                     currentPlayer="You";
                     resultCheck(cells);
                     if(!checkDraw()&&!checkWinner(arr,user)){console.log('Aryaman');
-                    let x=minimax(arr, computer);
+                    let x=minimax(arr, computer).id;
                     console.log(x);
                     arr[x]=computer;
                     console.log(arr);
@@ -180,54 +180,51 @@ $(document).ready(function(){
         let emptyspots = emptybox();
     
         if (checkWinner(newBoard, user)) {
-            return -10;
+            return {value:-10};
         } else if (checkWinner(newBoard, computer)) {
-            return 10;
+            return {value:10};
         } else if (emptyspots.length === 0) {
-            return 0;
+            return {value:0};
         }
     
-        let score = [];
-        let index=[];
+        let scodex=[]
         for (let i = 0; i < emptyspots.length; i++) {
-            let val,j;
-            j = newBoard[emptyspots[i]];
+            let valdex={};
+            valdex.id = newBoard[emptyspots[i]];
             newBoard[emptyspots[i]] = player;
             
             if (player == computer) {
-                val=-10000;
-                let result = minimax(newBoard, user);
-                val=Math.max(result,val);
+                let x = minimax(newBoard, user);
+                valdex.value=x.value;
             } else {
-                val=10000;
-                let result = minimax(newBoard, computer);
-                val=Math.min(val,result);
+                let x = minimax(newBoard, computer);
+                valdex.value=x.value;
             }
     
-            newBoard[emptyspots[i]] = j;
-            score.push(val);
-            index.push(j);
+            newBoard[emptyspots[i]] = valdex.id;
+            scodex.push(valdex);
+            
         }
     
-        let bestMove;
+        let position;
         if (player === computer) {
             let bestScore = -10000;
-            for (let i = 0; i < score.length; i++) {
-                if (score[i] > bestScore) {
-                    bestScore = score[i];
-                    bestMove = i;
+            for (let i = 0; i < scodex.length; i++) {
+                if (scodex[i].value > bestScore) {
+                    bestScore = scodex[i].value;
+                    position = i;
                 }
             }
         } else {
             let bestScore = 10000;
-            for (let i = 0; i < score.length; i++) {
-                if (score[i] < bestScore) {
-                    bestScore = score[i];
-                    bestMove = i;
+            for (let i = 0; i < scodex.length; i++) {
+                if (scodex[i].value < bestScore) {
+                    bestScore = scodex[i].value;
+                    position = i;
                 }
             }
         }
-        return index[bestMove];
+        return scodex[position];
     }
     function gameOver()
     {
